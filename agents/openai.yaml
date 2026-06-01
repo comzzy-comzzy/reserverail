@@ -1,0 +1,20 @@
+name: reserverail
+version: 0.1.0
+description: Autonomous RWA issuance, cashflow waterfall, and proof-of-reserve skill for Pharos Agent Center.
+framework: Pharos Skill Engine
+networks:
+  - mainnet
+  - atlantic-testnet
+entrypoints:
+  validate: node scripts/validate-asset.mjs --config assets/example-asset.json
+  deploy: node scripts/deploy-rail.mjs --network atlantic-testnet
+  issue: node scripts/issue-asset.mjs --network atlantic-testnet --rail 0xReserveRail --config assets/example-asset.json
+  proofOfReserve: node scripts/snapshot-reserves.mjs --network atlantic-testnet --rail 0xReserveRail --config assets/example-asset.json
+  distribute: node scripts/distribute-cashflow.mjs --network atlantic-testnet --rail 0xReserveRail --asset-id DEMO-INVOICE-001 --token native --amount 1000000 --config assets/example-asset.json
+  report: node scripts/generate-proof-report.mjs --network atlantic-testnet --rail 0xReserveRail --config assets/example-asset.json
+tags:
+  - rwa
+  - payments
+  - proof-of-reserve
+  - cashflow-waterfall
+  - pharos

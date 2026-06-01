@@ -1,0 +1,7 @@
+node_modules/
+build/
+*.log
+*.proof-report.json
+reserverail-proof-report.json
+.env
+.env.*

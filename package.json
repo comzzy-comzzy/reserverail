@@ -1,0 +1,22 @@
+{
+  "name": "reserverail",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Pharos Agent Center skill for autonomous RWA issuance, cashflow waterfalls, and proof-of-reserve attestations.",
+  "scripts": {
+    "check": "npm run check:mainnet && npm run check:testnet",
+    "check:mainnet": "node scripts/validate-asset.mjs --config assets/example-asset.json && node scripts/distribute-cashflow.mjs --network mainnet --rail 0x5555555555555555555555555555555555555555 --asset-id DEMO-INVOICE-001 --token native --amount 1000000 --config assets/example-asset.json --dry-run && node scripts/snapshot-reserves.mjs --network mainnet --rail 0x5555555555555555555555555555555555555555 --asset-id DEMO-INVOICE-001 --config assets/example-asset.json --dry-run",
+    "check:testnet": "node scripts/validate-asset.mjs --config assets/example-asset.json && node scripts/distribute-cashflow.mjs --network atlantic-testnet --rail 0x5555555555555555555555555555555555555555 --asset-id DEMO-INVOICE-001 --token native --amount 1000000 --config assets/example-asset.json --dry-run && node scripts/snapshot-reserves.mjs --network atlantic-testnet --rail 0x5555555555555555555555555555555555555555 --asset-id DEMO-INVOICE-001 --config assets/example-asset.json --dry-run",
+    "check:wallet": "npm run check:wallet:mainnet",
+    "check:wallet:mainnet": "node scripts/check-wallet.mjs --network mainnet",
+    "check:wallet:testnet": "node scripts/check-wallet.mjs --network atlantic-testnet",
+    "compile": "npx solcjs --bin --abi contracts/ReserveRail.sol -o build"
+  },
+  "dependencies": {
+    "viem": "^2.31.0"
+  },
+  "devDependencies": {
+    "solc": "^0.8.30"
+  }
+}
