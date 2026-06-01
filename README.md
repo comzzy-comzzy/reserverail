@@ -26,6 +26,7 @@ reserverail/
   scripts/
     deploy-rail.mjs                # Deploy ReserveRail
     issue-asset.mjs                # Register asset and configure waterfall
+    deposit-cashflow.mjs           # Send native/ERC-20 cashflow into a rail
     snapshot-reserves.mjs          # Compute and record reserve proof root
     distribute-cashflow.mjs        # Dry-run or execute waterfall payouts
     generate-proof-report.mjs      # Export proof report JSON
@@ -140,6 +141,13 @@ node scripts/snapshot-reserves.mjs \
 After the rail receives cashflow, preview and execute distribution:
 
 ```bash
+node scripts/deposit-cashflow.mjs \
+  --network atlantic-testnet \
+  --rail 0xReserveRail \
+  --asset-id DEMO-INVOICE-001 \
+  --token native \
+  --amount 1000000
+
 node scripts/distribute-cashflow.mjs \
   --network atlantic-testnet \
   --rail 0xReserveRail \
@@ -219,3 +227,20 @@ ReserveRail is designed for hackathon-grade RWA automation and agent workflows.
 It commits document hashes, reserve proof roots, coverage math, and waterfall
 events to Pharos. It does not replace legal agreements, custodian audits, KYC,
 or securities compliance.
+
+## Live Atlantic Testnet Smoke Test
+
+ReserveRail was tested live on Pharos Atlantic testnet with a burner wallet.
+
+| Item | Value |
+| --- | --- |
+| Rail contract | `0x28094CbDb3643B435383a646f8e28859F632ae55` |
+| Deploy tx | `0x0d83088f08e1737fadb1a83c83e43800dadc37c2ed9cbf8f2d1a5c81c9bb3dd0` |
+| Register asset tx | `0xfc4a66dacfe7ad16291ed598322a0f729da2bc37a0ec6b6bb6d0f1f4e5327349` |
+| Configure waterfall tx | `0x1c4d317d5917d962c6955c621179c8b54023505c6843caccde2a0b89a972b243` |
+| Reserve snapshot tx | `0xba1066204b2f469b6912b1bbcc733befc435ea6a004de37ce8104f6d5a456552` |
+| Deposit cashflow tx | `0xe359f1c4f469d8b07e4e48565af1dbf57bd791a825957b07a7ca663fa38b34bb` |
+| Record cashflow tx | `0x0707a81164db06c1fffeb8034d2d3072b6b800b35889ce62fd281fa9cc013fd1` |
+| Distribute cashflow tx | `0xffa49779a9b8da1c59fe2f4946e4c6d91a73576e77cdb8ad8e7780c74359ad51` |
+
+Explorer: https://atlantic.pharosscan.xyz/

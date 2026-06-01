@@ -106,6 +106,17 @@ PRIVATE_KEY=... node scripts/snapshot-reserves.mjs \
 
 ### Distribute Asset Cashflow
 
+Deposit native PHRS/PROS cashflow into the rail before distributing it.
+
+```bash
+PRIVATE_KEY=... node scripts/deposit-cashflow.mjs \
+  --network atlantic-testnet \
+  --rail 0xReserveRail \
+  --asset-id DEMO-INVOICE-001 \
+  --token native \
+  --amount 1000000
+```
+
 ```bash
 node scripts/distribute-cashflow.mjs \
   --network atlantic-testnet \

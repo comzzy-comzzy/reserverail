@@ -11,7 +11,7 @@
     "check:wallet": "npm run check:wallet:mainnet",
     "check:wallet:mainnet": "node scripts/check-wallet.mjs --network mainnet",
     "check:wallet:testnet": "node scripts/check-wallet.mjs --network atlantic-testnet",
-    "compile": "npx solcjs --bin --abi contracts/ReserveRail.sol -o build"
+    "compile": "npx solcjs --optimize --optimize-runs 200 --bin --abi contracts/ReserveRail.sol -o build"
   },
   "dependencies": {
     "viem": "^2.31.0"

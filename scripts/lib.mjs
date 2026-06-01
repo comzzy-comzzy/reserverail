@@ -41,7 +41,8 @@ export const reserveRailAbi = parseAbi([
 export const erc20Abi = parseAbi([
   "function balanceOf(address account) view returns (uint256)",
   "function decimals() view returns (uint8)",
-  "function symbol() view returns (string)"
+  "function symbol() view returns (string)",
+  "function transfer(address to,uint256 value) returns (bool)"
 ]);
 
 export function parseArgs(argv = process.argv.slice(2)) {
@@ -389,9 +390,11 @@ export function encodedCall(functionName, args) {
 }
 
 export function defaultGasSettings() {
+  const maxFeeGwei = process.env.MAX_FEE_GWEI || "1";
+  const priorityFeeGwei = process.env.MAX_PRIORITY_FEE_GWEI || "0";
   return {
-    maxFeePerGas: parseGwei("10"),
-    maxPriorityFeePerGas: 0n
+    maxFeePerGas: parseGwei(maxFeeGwei),
+    maxPriorityFeePerGas: parseGwei(priorityFeeGwei)
   };
 }
 
